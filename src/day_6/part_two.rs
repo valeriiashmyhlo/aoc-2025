@@ -35,15 +35,9 @@ impl Input<Vec<char>> {
                 .filter(|str| *str != ' ')
                 .collect::<Vec<char>>();
 
-        let mut columns: Vec<Vec<char>> = Vec::new();
-        
-        for col in 0..lines[0].len() {
-            let mut val: Vec<char> = Vec::new();
-            for line in &lines {
-                val.push(line[col]);
-            }
-            columns.push(val);   
-        }
+        let columns = (0..lines[0].len()).map(|col| {
+            lines.iter().map(|line| line[col]).collect::<Vec<char>>()
+        }).collect::<Vec<Vec<char>>>();
 
         let mut values: Vec<Vec<Vec<char>>> = Vec::new();
         let mut row_values: Vec<Vec<char>> = Vec::new();
